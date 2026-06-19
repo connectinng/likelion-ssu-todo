@@ -1,4 +1,4 @@
-package likelion.todo.domain.todo.repository;
+package likelion.todo.domain.member.repository;
 
 import likelion.todo.domain.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -4,7 +4,7 @@ package likelion.todo.domain.member.service;
 import likelion.todo.domain.member.dto.MemberRegisterRequestDTO;
 import likelion.todo.domain.member.dto.MemberRegisterResponseDTO;
 import likelion.todo.domain.member.entity.Member;
-import likelion.todo.domain.todo.repository.MemberRepository;
+import likelion.todo.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

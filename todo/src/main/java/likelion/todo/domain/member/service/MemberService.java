@@ -1,10 +1,12 @@
 package likelion.todo.domain.member.service;
 
 
+import likelion.todo.domain.member.dto.MemberLoginRequestDTO;
+import likelion.todo.domain.member.dto.MemberLoginResponseDTO;
 import likelion.todo.domain.member.dto.MemberRegisterRequestDTO;
 import likelion.todo.domain.member.dto.MemberRegisterResponseDTO;
 import likelion.todo.domain.member.entity.Member;
-import likelion.todo.domain.todo.repository.MemberRepository;
+import likelion.todo.domain.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -35,8 +37,16 @@ public class MemberService {
         memberRepository.save(member);
 
         return new MemberRegisterResponseDTO(member.getId());
+    }
 
+    public MemberLoginResponseDTO login(MemberLoginRequestDTO req) {
+        Member member = memberRepository.findByUsername(req.username())
+                .orElseThrow(()->new ResponseStatusException(HttpStatus.BAD_REQUEST,"멤버를 찾을 수 없습니다."));
 
+        if (!req.password().equals(member.getPassword())) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "비밀번호가 일치하지 않습니다.");
+        }
 
+        return new MemberLoginResponseDTO(member.getId());
     }
 }
